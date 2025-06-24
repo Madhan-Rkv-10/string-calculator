@@ -4,12 +4,18 @@ class StringCalculator {
   StringCalculator._();
   int add(String numbers) {
     if (numbers.isEmpty) return 0;
-    final numberList = numbers.replaceAll("\n", ',').split(',');
+    String delimiter = ',';
+    if (numbers.startsWith('//')) {
+      delimiter = numbers.substring(2, numbers.indexOf('\n'));
+      numbers = numbers.substring(numbers.indexOf('\n') + 1);
+    }
+    final numberList = numbers.split(RegExp('[$delimiter\n]'));
     int sum = 0;
     for (String number in numberList) {
       int parsedNumber = int.tryParse(number) ?? 0;
       sum += parsedNumber;
     }
+
     return sum;
   }
 }

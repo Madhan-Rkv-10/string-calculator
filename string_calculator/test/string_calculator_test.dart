@@ -24,5 +24,8 @@ void main() {
     test('Input: "1\n5\n7", Output: 13', () {
       expect(calculator.add('1,\n5\n7'), 13);
     });
+    test('Input: "//*\n1*25*3", Output: 29', () {
+      expect(calculator.add('//*\n1*25*3'), 29);
+    });
   });
 }
