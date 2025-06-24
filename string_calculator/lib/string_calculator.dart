@@ -16,14 +16,8 @@ class StringCalculator {
       numbers = numbers.substring(endIndex + 1);
     }
 
-    for (String delimiter in delimiters) {
-      numbers = numbers.replaceAll(delimiter, ',');
-    }
-    numbers = numbers.replaceAll('\n', ',');
-    List<String> numberList = numbers
-        .split(',')
-        .where((s) => s.isNotEmpty)
-        .toList();
+    numbers = numbers.replaceAll(RegExp('[${delimiters.join('')}\n]'), ',');
+    List<String> numberList = numbers.split(',');
 
     int sum = 0;
     List<int> negativeNumbers = [];
