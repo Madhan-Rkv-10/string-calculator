@@ -18,5 +18,11 @@ void main() {
     test('Input: "1,5", Output: 6', () {
       expect(calculator.add('1,2,3'), 6);
     });
+    test('Input: "1\n5", Output: 6', () {
+      expect(calculator.add('1,\n5'), 6);
+    });
+    test('Input: "1\n5\n7", Output: 13', () {
+      expect(calculator.add('1,\n5\n7'), 13);
+    });
   });
 }
