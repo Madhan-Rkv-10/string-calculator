@@ -53,5 +53,8 @@ void main() {
         expect(calculator.add("//[***]\n1***2***3"), 6);
       },
     );
+    test("Allow multiple delimiters  input://[*][%]\n1*4%3 output :8 ", () {
+      expect(calculator.add("//[*][%]\n1*4%3"), 8);
+    });
   });
 }

@@ -4,16 +4,27 @@ class StringCalculator {
   StringCalculator._();
   int add(String numbers) {
     if (numbers.isEmpty) return 0;
-    String delimiter = ',';
+
+    List<String> delimiters = [','];
     if (numbers.startsWith('//')) {
       int endIndex = numbers.indexOf('\n');
-      delimiter = numbers
-          .substring(2, endIndex)
-          .replaceAll('[', '')
-          .replaceAll(']', '');
+      String delimiterString = numbers.substring(2, endIndex);
+      delimiters = delimiterString
+          .split(RegExp(r'\]\['))
+          .map((delimiter) => delimiter.replaceAll('[', '').replaceAll(']', ''))
+          .toList();
       numbers = numbers.substring(endIndex + 1);
     }
-    final numberList = numbers.split(RegExp('[$delimiter\n]'));
+
+    for (String delimiter in delimiters) {
+      numbers = numbers.replaceAll(delimiter, ',');
+    }
+    numbers = numbers.replaceAll('\n', ',');
+    List<String> numberList = numbers
+        .split(',')
+        .where((s) => s.isNotEmpty)
+        .toList();
+
     int sum = 0;
     List<int> negativeNumbers = [];
     for (String number in numberList) {
