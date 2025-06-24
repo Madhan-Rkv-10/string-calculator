@@ -11,9 +11,20 @@ class StringCalculator {
     }
     final numberList = numbers.split(RegExp('[$delimiter\n]'));
     int sum = 0;
+    List<int> negativeNumbers = [];
     for (String number in numberList) {
       int parsedNumber = int.tryParse(number) ?? 0;
-      sum += parsedNumber;
+      if (parsedNumber < 0) {
+        negativeNumbers.add(parsedNumber);
+      } else {
+        sum += parsedNumber;
+      }
+    }
+
+    if (negativeNumbers.isNotEmpty) {
+      throw Exception(
+        'negative numbers not allowed : ${negativeNumbers.join(',')}',
+      );
     }
 
     return sum;

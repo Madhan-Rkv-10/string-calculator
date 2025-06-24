@@ -27,5 +27,22 @@ void main() {
     test('Input: "//*\n1*25*3", Output: 29', () {
       expect(calculator.add('//*\n1*25*3'), 29);
     });
+    test('Input: "//*\n1*25*3", Output: 29', () {
+      expect(calculator.add('//*\n1*25*3'), 29);
+    });
+    test('throw exception for negative numbers ', () {
+      expect(() => calculator.add('-1'), throwsA(isA<Exception>()));
+    });
+    test('throw exception for negative numbers and split by commas', () {
+      expect(
+        () => calculator.add('-1,-2'),
+        throwsA(
+          predicate((e) {
+            final exception = e.toString();
+            return exception.contains("-1") && exception.contains("-2");
+          }),
+        ),
+      );
+    });
   });
 }
