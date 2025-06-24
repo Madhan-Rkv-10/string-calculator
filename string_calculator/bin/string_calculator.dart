@@ -9,4 +9,5 @@ void main(List<String> arguments) {
   print(calculator.add("//;\n1;2;5;3"));
   print(calculator.add("//*\n1*25*3"));
   print(calculator.add('1,-2,3'));
+  print(calculator.add("2,1001"));
 }

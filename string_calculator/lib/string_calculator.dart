@@ -17,7 +17,9 @@ class StringCalculator {
       if (parsedNumber < 0) {
         negativeNumbers.add(parsedNumber);
       } else {
-        sum += parsedNumber;
+        if (parsedNumber <= 1000) {
+          sum += parsedNumber;
+        }
       }
     }
 

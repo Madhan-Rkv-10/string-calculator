@@ -44,5 +44,8 @@ void main() {
         ),
       );
     });
+    test("ignore if value is more than 1000 -> input: 2,1002  output : 2 ", () {
+      expect(calculator.add("2,1002"), 2);
+    });
   });
 }
