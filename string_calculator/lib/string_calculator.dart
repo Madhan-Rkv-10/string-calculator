@@ -9,15 +9,30 @@ class StringCalculator {
     if (numbers.startsWith('//')) {
       int endIndex = numbers.indexOf('\n');
       String delimiterString = numbers.substring(2, endIndex);
-      delimiters = delimiterString
-          .split(RegExp(r'\]\['))
-          .map((delimiter) => delimiter.replaceAll('[', '').replaceAll(']', ''))
-          .toList();
+      delimiters = [];
+      int index = 0;
+      while (index < delimiterString.length) {
+        if (delimiterString[index] == '[') {
+          int endDelimiterIndex = delimiterString.indexOf(']', index);
+          delimiters.add(
+            delimiterString.substring(index + 1, endDelimiterIndex),
+          );
+          index = endDelimiterIndex + 1;
+        } else {
+          delimiters.add(delimiterString[index]);
+          index++;
+        }
+      }
       numbers = numbers.substring(endIndex + 1);
     }
-
-    numbers = numbers.replaceAll(RegExp('[${delimiters.join('')}\n]'), ',');
-    List<String> numberList = numbers.split(',');
+    for (String delimiter in delimiters) {
+      numbers = numbers.replaceAll(delimiter, ',');
+    }
+    numbers = numbers.replaceAll('\n', ',');
+    List<String> numberList = numbers
+        .split(',')
+        .where((s) => s.isNotEmpty)
+        .toList();
 
     int sum = 0;
     List<int> negativeNumbers = [];
@@ -25,16 +40,14 @@ class StringCalculator {
       int parsedNumber = int.tryParse(number) ?? 0;
       if (parsedNumber < 0) {
         negativeNumbers.add(parsedNumber);
-      } else {
-        if (parsedNumber <= 1000) {
-          sum += parsedNumber;
-        }
+      } else if (parsedNumber <= 1000) {
+        sum += parsedNumber;
       }
     }
 
     if (negativeNumbers.isNotEmpty) {
       throw Exception(
-        'negative numbers not allowed : ${negativeNumbers.join(',')}',
+        'Negative numbers not allowed: ${negativeNumbers.join(', ')}',
       );
     }
 

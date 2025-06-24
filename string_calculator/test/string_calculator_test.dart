@@ -56,5 +56,11 @@ void main() {
     test("Allow multiple delimiters  input://[*][%]\n1*4%3 output :8 ", () {
       expect(calculator.add("//[*][%]\n1*4%3"), 8);
     });
+    test(
+      "Allow multiple delimiters with length longer than one char input : //[][%%]\n12%%3  output : 6",
+      () {
+        expect(calculator.add("//[][%%]\n1 2%%3"), 6);
+      },
+    );
   });
 }
