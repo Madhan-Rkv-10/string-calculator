@@ -6,8 +6,12 @@ class StringCalculator {
     if (numbers.isEmpty) return 0;
     String delimiter = ',';
     if (numbers.startsWith('//')) {
-      delimiter = numbers.substring(2, numbers.indexOf('\n'));
-      numbers = numbers.substring(numbers.indexOf('\n') + 1);
+      int endIndex = numbers.indexOf('\n');
+      delimiter = numbers
+          .substring(2, endIndex)
+          .replaceAll('[', '')
+          .replaceAll(']', '');
+      numbers = numbers.substring(endIndex + 1);
     }
     final numberList = numbers.split(RegExp('[$delimiter\n]'));
     int sum = 0;

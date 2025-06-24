@@ -47,5 +47,11 @@ void main() {
     test("ignore if value is more than 1000 -> input: 2,1002  output : 2 ", () {
       expect(calculator.add("2,1002"), 2);
     });
+    test(
+      "Delimiters can be of any length  input://[***]\n1***2***3 output :6 ",
+      () {
+        expect(calculator.add("//[***]\n1***2***3"), 6);
+      },
+    );
   });
 }
