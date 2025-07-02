@@ -25,10 +25,10 @@ void main() {
       expect(calculator.add('1,\n5\n7'), 13);
     });
     test('Input: "//*\n1*25*3", Output: 29', () {
-      expect(calculator.add('//*\n1*25*3'), 29);
+      expect(calculator.add('//*\n1*25*3'), 75);
     });
     test('Input: "//*\n1*25*3", Output: 29', () {
-      expect(calculator.add('//*\n1*25*3'), 29);
+      expect(calculator.add('//*\n1*25*3'), 75);
     });
     test('throw exception for negative numbers ', () {
       expect(() => calculator.add('-1'), throwsA(isA<Exception>()));
@@ -60,6 +60,18 @@ void main() {
       "Allow multiple delimiters with length longer than one char input : //[][%%]\n12%%3  output : 6",
       () {
         expect(calculator.add("//[][%%]\n1 2%%3"), 6);
+      },
+    );
+    test("multiplication operation when the delemeter is  * ", () {
+      expect(calculator.add("//[***]\n1***2***3"), 6);
+    });
+    test("multiplication operation when the delemeter is  * ", () {
+      expect(calculator.add("//[*]\n2*2*3"), 12);
+    });
+    test(
+      "Delimiters can be of any length  input://[***]\n1***2***3 output :6 ",
+      () {
+        expect(calculator.add("//[***]\n1***2***3"), 6);
       },
     );
   });
